@@ -2,7 +2,7 @@ import os
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
-WP_API_URL   = 'https://graph.facebook.com/v2.6/me/messages?access_token=TEU-TOKEN-AQUI'
+WP_API_URL   = 'https://graph.facebook.com/v2.6/me/messages?access_token=chupacabra'
 
 @app.route("/webhook", methods=['GET'])
 def webhook_handle():
