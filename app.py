@@ -19,7 +19,7 @@ def webhook_handle():
 
     data = request.data.decode('utf-8')
     #jsonify(data)
-    return print('oi')
+    return 'teste'
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
