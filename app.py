@@ -11,9 +11,9 @@ def webhook_handle():
     if challenge != '*' and verify_token == 'chupacabra':
         return challenge
 
-    #data = request.data.decode('utf-8')
-    data = json.loads(request.data.decode('utf-8'))
-    return jsonify(data)
+    data_1 = request.data.decode('utf-8')
+    data =  json.loads(request.data.decode('utf-8')) 
+    return data
 
 
 def send_message(recipient_id, text): 
