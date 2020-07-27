@@ -14,7 +14,7 @@ def webhook_handle():
     ar = 'Lente Azul'
     challenge       = request.args.get('hub.challenge',    default = '*', type = str)
     verify_token    = request.args.get('hub.verify_token', default = '',  type = str)
-    if challenge == '*' and verify_token == 'chupacabra':
+    if challenge != '*' and verify_token == 'chupacabra':
         return challenge
 
     data = request.data.decode('utf-8')
