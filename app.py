@@ -20,6 +20,15 @@ def webhook_handle():
     output = request.get_json()
     return output
 
+@app.endpoint('/endpoint.endpoint')
+def example():
+    ar = 'Lente Azul'
+    challenge       = request.args.get('hub.challenge',    default = '*', type = str)
+    verify_token    = request.args.get('hub.verify_token', default = '',  type = str)
+    if challenge != '*' and verify_token == 'chupacabra':
+        return challenge
+    return "example"
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
