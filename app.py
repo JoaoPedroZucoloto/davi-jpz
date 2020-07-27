@@ -18,7 +18,8 @@ def webhook_handle():
         return challenge
 
     data = request.data.decode('utf-8')
-    return jsonify(data.keys())
+    #jsonify(data)
+    return print('oi')
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
