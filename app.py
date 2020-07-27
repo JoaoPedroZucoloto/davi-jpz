@@ -20,7 +20,7 @@ def webhook_handle():
     output = request.get_json()
     return output
 
-@app.endpoint('/endpoint.endpoint')
+@app.endpoint('/endpoint')
 def example():
     ar = 'Lente Azul'
     challenge       = request.args.get('hub.challenge',    default = '*', type = str)
