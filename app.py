@@ -5,9 +5,13 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def nao_entre_em_panico():
-    with open('caminho-completo/teste.txt', 'a') as file:
-            file.write(request.data.decode('utf-8'))
-            file.read()
+    ar = 'Lente Azul'
+    challenge       = request.args.get('hub.challenge',    default = '*', type = str)
+    verify_token    = request.args.get('hub.verify_token', default = '',  type = str)
+    if challenge != '*' and verify_token == 'chupacabra':
+        return challenge
+
+    return ar
 
 @app.route("/webhook", methods=['GET','POST'])
 def webhook_handle():
@@ -20,14 +24,6 @@ def webhook_handle():
     output = request.get_json()
     return output
 
-@app.endpoint('/endpoint')
-def example():
-    ar = 'Lente Azul'
-    challenge       = request.args.get('hub.challenge',    default = '*', type = str)
-    verify_token    = request.args.get('hub.verify_token', default = '',  type = str)
-    if challenge != '*' and verify_token == 'chupacabra':
-        return challenge
-    return "example"
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
