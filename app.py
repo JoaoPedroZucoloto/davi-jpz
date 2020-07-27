@@ -9,7 +9,7 @@ def nao_entre_em_panico():
             file.write(request.data.decode('utf-8'))
             file.read()
 
-@app.route("/webhook", methods=['GET','POST'])
+@app.route("/webhook", methods=['GET'])
 def webhook_handle():
     ar = 'Lente Azul'
     challenge       = request.args.get('hub.challenge',    default = '*', type = str)
