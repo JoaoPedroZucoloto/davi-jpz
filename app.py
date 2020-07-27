@@ -17,7 +17,7 @@ def webhook_handle():
     if challenge != '*' and verify_token == 'chupacabra':
         return challenge
 
-    data = request.data()
+    data = request.data.decode('utf-8')
     return jsonify(data)
 
 if __name__ == "__main__":
