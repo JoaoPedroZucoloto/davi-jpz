@@ -17,8 +17,8 @@ def webhook_handle():
     if challenge == '*' and verify_token == 'chupacabra':
         return challenge
 
-    output = request.get_json()
-    return jsonify(output)
+    data = request.data.decode('utf-8')
+    return jsonify(data)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
