@@ -11,7 +11,7 @@ def nao_entre_em_panico():
     if challenge != '*' and verify_token == 'chupacabra':
         return challenge
 
-    return ar
+    return request
 
 @app.route("/webhook", methods=['GET','POST'])
 def webhook_handle():
