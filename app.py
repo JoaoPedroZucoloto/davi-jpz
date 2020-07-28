@@ -8,5 +8,4 @@ r = requests.get("https://graph.facebook.com/v7.0/me?fields=id%2Cname&access_tok
 print(r.text)
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run()
