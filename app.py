@@ -2,11 +2,11 @@ import os
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
-WP_API_URL  = 'https://graph.facebook.com/v2.6/me/messages?access_token=DQVJ2aGJTemxSZAXhpNU5TZAVdxNFk2a0FYRzFHd2FqS3MwVFBRMkJVeFhudVBnS3ZAwWjRBOU41alpDbXlIUnN0ejNBZA0ZARSUV1NWE5dTN5dDVNTzlMazlEMWRweHBYbDVaTENOQWFrcE5mWmlEamU2cWtwRTVWSklkR050aEN0SFVhamV4ZAEY4RndJZA0QtakFUVEtyMUQxRmFaVVh6OHdxLWNjZAVJQUDk0RXlJQ2lkdW1YUFZAQSkJXSF9Ed2UyRkJnLTl1ZAW9R'
+WP_API_URL  = 'https://graph.facebook.com/v2.6/me?fields=id,name?access_token=DQVJ2aGJTemxSZAXhpNU5TZAVdxNFk2a0FYRzFHd2FqS3MwVFBRMkJVeFhudVBnS3ZAwWjRBOU41alpDbXlIUnN0ejNBZA0ZARSUV1NWE5dTN5dDVNTzlMazlEMWRweHBYbDVaTENOQWFrcE5mWmlEamU2cWtwRTVWSklkR050aEN0SFVhamV4ZAEY4RndJZA0QtakFUVEtyMUQxRmFaVVh6OHdxLWNjZAVJQUDk0RXlJQ2lkdW1YUFZAQSkJXSF9Ed2UyRkJnLTl1ZAW9R'
 
 @app.route("/webhook", methods=['GET'])
 def webhook_handle():
-    response = requests.get('https://graph.facebook.com/' + str(user_id) + '?fields=name,first_name&access_token=' + WP_TOKEN)
+    response = requests.get('https://graph.facebook.com/v2.6/me?fields=id,name?access_token=DQVJ2aGJTemxSZAXhpNU5TZAVdxNFk2a0FYRzFHd2FqS3MwVFBRMkJVeFhudVBnS3ZAwWjRBOU41alpDbXlIUnN0ejNBZA0ZARSUV1NWE5dTN5dDVNTzlMazlEMWRweHBYbDVaTENOQWFrcE5mWmlEamU2cWtwRTVWSklkR050aEN0SFVhamV4ZAEY4RndJZA0QtakFUVEtyMUQxRmFaVVh6OHdxLWNjZAVJQUDk0RXlJQ2lkdW1YUFZAQSkJXSF9Ed2UyRkJnLTl1ZAW9R' + WP_TOKEN)
     challenge       = request.args.get('hub.challenge',    default = '*', type = str)
     verify_token    = request.args.get('hub.verify_token', default = '',  type = str)
     if challenge != '*' and verify_token == 'chupacabra':
@@ -15,7 +15,7 @@ def webhook_handle():
     data = request.data.decode('utf-8')
     entry = data['entry'][0]['messaging'][0]
     sender_id = profile_info(entry['sender']['id'])
-    return jsonify(data)
+    return response
 
 
 def send_message(recipient_id, text): 
