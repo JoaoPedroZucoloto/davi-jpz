@@ -6,12 +6,13 @@ WP_API_URL  = 'https://graph.facebook.com/v2.6/me/messages?access_token=DQVJ2aGJ
 
 @app.route("/webhook", methods=['GET'])
 def webhook_handle():
+    response = requests.get('https://graph.facebook.com/' + str(user_id) + '?fields=name,first_name&access_token=' + WP_TOKEN)
     challenge       = request.args.get('hub.challenge',    default = '*', type = str)
     verify_token    = request.args.get('hub.verify_token', default = '',  type = str)
     if challenge != '*' and verify_token == 'chupacabra':
         return challenge
 
-    data = json.loads(request.data.decode('utf-8'))
+    data = request.data.decode('utf-8')
     entry = data['entry'][0]['messaging'][0]
     sender_id = profile_info(entry['sender']['id'])
     return jsonify(data)
